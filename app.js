@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 
+const mongoose = require("mongoose")
+
 const products = require("./routes/products")
 const home = require("./routes/home")
 const cors = require("cors")
@@ -8,16 +10,18 @@ const cors = require("cors")
 app.use(express.json()) //gelen datanın Json olarak okunacağını söylüyoruz
 
 app.use(cors({
-    origin:"*",  //belirli adreslen eklenebilir abc.com şeklinde, Bir kaçtene adres ekliyiceksek bir dizi gönderiyoruz. ["abx.com" , "lkasmd.com" ] şeklinde tek tek yazılabilir.
-    methods:["GET" , "POST"] //-> diğerinde "GET POST" şeklinde yazılıyordu bunda iseikinci parametre şeklinde ekleniyor.
+    origin:"*",  
+    methods:["GET" , "POST"]
 })) 
 
 
-//headerı APİ tarafından karşı tarafa gönderirken linklerin üstünde bulunması önemli
 app.use("/api/product", products )
 app.use( "/", home )
 
-
+//serverimize bu şekilde bağlanıyoruz
+mongoose.connect("mongodb+srv://erkankolakan:tmVuxo01HxJRuSz2@cluster0.shuzdaz.mongodb.net/?retryWrites=true&w=majority")
+    .then( () => { console.log("mongoDB bağlantısı başarılı")})
+    .catch( (err) => { err })
 
 app.listen(3000 , () => {
     console.log("listening on port 3000")
