@@ -19,7 +19,13 @@ app.use("/api/product", products )
 app.use( "/", home )
 
 //serverimize bu şekilde bağlanıyoruz
-mongoose.connect("mongodb+srv://erkankolakan:tmVuxo01HxJRuSz2@cluster0.shuzdaz.mongodb.net/?retryWrites=true&w=majority")
+
+const userName = "erkankolakan"
+const password = "tmVuxo01HxJRuSz2"
+const dataBase = "shopdb"
+
+//--> burası normalde  mongodb.net/?retryWrites= bu şekilde biz /? arasına data basenin ismi  ne olsun istiyorsak onu yazıyoruz
+mongoose.connect(`mongodb+srv://${userName}:${password}@cluster0.shuzdaz.mongodb.net/${dataBase}?retryWrites=true&w=majority`)
     .then( () => { console.log("mongoDB bağlantısı başarılı")})
     .catch( (err) => { err })
 
@@ -31,19 +37,33 @@ mongoose.connect("mongodb+srv://erkankolakan:tmVuxo01HxJRuSz2@cluster0.shuzdaz.m
         imageUrl: String,
         date: {
             type: Date,
-        default: Date.now //her zaman anlık değeri alısın. Date ye date: Date şeklinde de tanımlanabilirdi
+        default: Date.now 
         },
         isActive: Boolean
     });
 
 //MODEL
-    const Product = mongoose.model("Product" , productSchema) //-> modelin ismi Product, Product modeline productSchema Schemasını verdik
+    const Product = mongoose.model("Product" , productSchema) 
 
-//tanımladığımız bu model sayesinde bir çok method kulllanabiliriz. Bu sayede veri tabanına yükleme silme güncellleme işlemlerini yapabiliriz
+//Nesne
+    const prd = new Product({ //Product sınıfı üzerinden p adında bir nesne oluşturduk.
+        name: "iphone 14",
+        price: 30000,
+        description:"iyi telefon",
+        imageUrl:"1.jpg",
+        isActive: true          
+    });
 
-//nesne => Product -- product sınıfından türetilmiş bir nesneye ihtiyacımız var. ör/ p1 nesenesi türeticez ve içerisini productSchema sındaki bilgilerle türeticez ve p1 üzerinden save methodunu kullanarak veri tabanına kaydedicez.
-
-
+    (async () => {
+        try {
+        const result = await prd.save();
+        console.log(result);
+                                                    //-> nesneyi veri tabanına kaydettik
+        } catch (err) {
+            console.log(err);
+        }
+    })();              
+ 
 app.listen(3000 , () => {
     console.log("listening on port 3000")
 }) 
