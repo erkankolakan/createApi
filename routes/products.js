@@ -4,13 +4,48 @@ const router = express.Router()
 //modeller
 const {Product , validateProduct} = require("../models/product")
 
- 
+ /*
+    Query Operators
+    eq => equal -- eşistlik
+    ne => not equal -- eşit değildir
+    gt => greater than -- daha büyük >
+    gte => greater than or equal -- daha büyük ya da eşit >=
+    lt => less than -- küçüktür <
+    lte => less than or equal -- küçüktür ya da eşit <=
+    in => [10 , 20 , 30] -- fiyatı 10 , 20 , 30 olan öğeleri al  
+    nin => [10 , 20 , 30] -- fiyatı 10 , 20 , 30 olmayan öğeleri al  
+ */
 
 router.get("/", async(req ,res) => {
-    const products = await Product.find() //Product üzerinde olan tüm veriyi alır
-    // const products = await Product.find({price :10000 , isActive: true }) //where koşulu gibi price değeri 10000 olanı getir demiş olduk
-    // const products = await Product.find({isActive: true }).select({ name:1 }) // name değerine 1 dersek sadece name kolonunu diğerlerinini 0 kabul eder. Eğer name değerine 0 dersek name değerini almaz diğer tüm kolonları alır
-    // const products = await Product.find({isActive: true }).limit(2).select({ name:1 }) // bu şekilde limit yazarsak gelen 100 tane obje varsa 10 tanesini alır.
+    // const products = await Product.find() 
+    // const products = await Product.fing({price : {$ne : 10000}}) // price != 10000 olmayan tüm öğeleri al
+    // const products = await Product.fing({price : {$gt : 10000}}) // price > 10000  olan tüm öğeleri al
+    // const products = await Product.fing({price : {$gte : 10000}})//price >= 10000  olan tüm öğeleri al
+    // const products = await Product.fing({price : {$lt : 10000}}) // price < 10000  olan tüm öğeleri al
+    // const products = await Product.fing({price : {$lte : 10000}}) // price <= 10000  olan tüm öğeleri al
+    // const products = await Product.fing({price : {$in :[10000 ,20000]}}) // fiyatı 10000 ile 20000 eşit olan öğeleri al
+    // const products = await Product.fing({price : {$nin :[10000 ,20000]}}) // fiyatı 10000 ile 20000 e eşit olmayan öğeleri al
+    // const products = await Product.fing({price : {$gte : 10000 , $lte: 20000 }}) // price >= 10000 && price <= 20000
+    // const products = await Product.fing({price : {$gte : 10000 , $lte: 20000 } , name: "Iphone" }) // Bu şekilde yazarak fiyatı 10000 ile 20000 arasında olan ve name i Iphone olan öğeleri al. Burada aslında AND operatoru kullanmış oluyoruz
+/*  const products = await Product.fing()
+                                .or([
+                                    { price : {$gte : 10000 }}, //1.kriter
+                                    {isActive: true } //2. kriter
+                                ]) // or demek içinde yani yada demek içinde bu şekilde kullanmamız gerekir or.([]) köşeli parantez kullanmayı unutma. Fiyatı (10000 >= or isActive== true) olan değerleri al */
+
+// startwith --> herhangi bir bilgiyle başlıyor mu ?
+
+// const products = await Product.find({ name: /^iphone/}i) //sonu önemli değil, iphone ile başlayan tüm öpeleri al 
+
+// end with --> herhangi bir bilgiyle bitiyor mu ?
+
+// const products = await Product.find({name: /iphone$/}i) //başlangıcı önemli değil sonu iphone ile başlayan tüm öğeleri al.
+
+// contains
+
+    const products = await Product.find({name: /.*iphone.*/i}) //içerisinde iphone geçen tüm öğeleri al !! büyük küçük harf önemli olmasın diyorsanız sonuna i eklememiz gerekir. i eklemezsek girilen kelimede büyük küçük harfe bakar.
+
+ 
     res.send(products)
 })
 
@@ -40,17 +75,15 @@ router.post("/", async (req ,res) => {
     })
   
 
-router.put("/:id", (req ,res) =>{
-    //ilgili id ye göre ürünü almamız gerekir
-    const product = products.find(p => p.id == req.params.id);
+router.put("/:id", async(req ,res) =>{
+    const id = req.params.id
+    const product = await Product.findById({_id:id});
     if (!product) {
         return res.status(400).send("aradığınız ürün bulunamadı")
     }
-    //validate
-    //güncellemek istediği ürünü validate işlemine tabi tutmamız gerekir
     const {error} = validateProduct(req.body)   
 
-    if ( error ) { //result dan hata gelirse direk sayfaya bu hatayı yazdır
+    if ( error ) { 
         return res.status(400).send(result.error.details[0].message)
     }
 
@@ -60,27 +93,24 @@ router.put("/:id", (req ,res) =>{
 })
 
 
-router.delete("/:id" , (req, res) => {
-
-    const product = products.find(p => p.id == req.params.id);
+router.delete("/:id" , async(req, res) => {
+    const id = req.params.id
+    const product = await Product.findById({_id:id});
 
     if (!product) {
         return res.status(404).send("Böyle bir ürün bulunamadı")
     }
 
-    const index = products.indexOf(product) //products dizisi içine bak parametreden gelen id değerine eşit index değeri varsa o objeyi seçç
+    const index = products.indexOf(product) 
 
-    products.splice(index, 1) //index konumundan itibaren 1 tane değer sil
-
+    products.splice(index, 1) 
     res.send(product)
 })
 
 
 router.get("/:id" , async(req, res) => {
     const id = req.params.id
-    // const product = await Product.find({_id:id});
-    // const product = await Product.findOne({_id:id});
-    const product = await Product.findById({_id:id}); //hepsini kullanabiliriz 
+    const product = await Product.findById({_id:id});
 
     if (!product) {
         return res.status(404).send("Böyle bir ürün bulunamadı")
@@ -91,3 +121,13 @@ router.get("/:id" , async(req, res) => {
 
 
 module.exports = router
+
+
+
+/*
+Query Oparators
+-- const products = await Product.find({price :10000 , isActive: true }) //where koşulu gibi price değeri 10000 olanı getir demiş olduk
+-- const products = await Product.find({isActive: true }).select({ name:1 }) // name değerine 1 dersek sadece name kolonunu diğerlerinini 0 kabul eder. Eğer name değerine 0 dersek name değerini almaz diğer tüm kolonları alır
+-- const products = await Product.find({isActive: true }).limit(2).select({ name:1 }) // bu şekilde limit yazarsak gelen 100 tane obje varsa 10 tanesini alır.
+
+*/
