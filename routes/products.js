@@ -26,13 +26,8 @@ router.post("/", async (req ,res) => {
             isActive: req.body.isActive          
         });
 
-        try {
-            const result = await product.save();
-            res.send(result);
-            
-        } catch (err) {
-            console.log(err);
-        }
+            const newProduct = await product.save();
+            res.send(newProduct);
     })
   
 
@@ -83,14 +78,14 @@ router.put("/:id", async(req ,res) =>{
    product.isActive = req.body.isActive;
    res.send(product)
 
-   const updatedProduct = await product.save()
+   const updatedProduct = await product.save() // güncellemeden sonra save etmeyi unutmaman gerekir
    res.send(updatedProduct)
 });
 
 router.delete("/:id" , async(req, res) => {
     const id = req.params.id
 
-    const product = await Product.deleteOne({ _id : id })
+    const product = await Product.DeleteOne({ _id : id })
     if (!product) { // burayı deleteOne de kullanamayız onun için findByIdAndDelete kullanmak gerek
         return res.status(404).send("Ürün silinirken hata oluştu veya belge bulunamadı.");
     }
