@@ -1,38 +1,45 @@
 const express = require("express")
 const router = express.Router()
-const Joi = require('joi');
 
-//router içine taşısıktan sonra app içinden değil expressin router i üzerinden routlama işlemi yapmalısın
+//modeller
+const {Product , validateProduct} = require("../models/product")
 
-const products = [
-    {id:1 , name:"iphone 12" , price:2000},
-    {id:2 , name:"iphone 13" , price:3000},
-    {id:3 , name:"iphone 14" , price:4000}
-]
+    const products = [
+        {id:1, name:"iphone 13", price: 20000},
+        {id:2, name:"iphone 13", price: 30000},
+        {id:3, name:"iphone 13", price: 40000}
+    ]
 
 router.get("/", (req ,res) => {
     res.send(products)
 })
 
-router.post("/", (req ,res) => {
+router.post("/", async (req ,res) => {
+        const {error} = validateProduct(req.body)
 
-    const {error} = validateProduct(req.body)
+        if ( error ) {
+            return res.status(400).send(error.details[0].message)
+        }
 
-    if ( error ) { //result dan hata gelirse direk sayfaya bu hatayı yazdır
-        return res.status(400).send(result.error.details[0].message)
-    }
+        //Nesne
+        const product = new Product({ //Product sınıfı üzerinden p adında bir nesne oluşturduk.
+            name: req.body.name,
+            price: req.body.price,
+            description: req.body.description,
+            imageUrl: req.body.imageUrl,
+            isActive: req.body.isActive          
+        });
 
-    const product = {
-        id: products.length + 1, 
-        name: req.body.name, 
-        price: req.body.price
-    };
-    products.push(product);
-    console.log(req.body)
-    res.send(product) 
-})
+        try {
+            const result = await product.save();
+            res.send(result);
+            
+        } catch (err) {
+            console.log(err);
+        }
+    })
   
-//put güncelleme işlemleri için kullanılır
+
 router.put("/:id", (req ,res) =>{
     //ilgili id ye göre ürünü almamız gerekir
     const product = products.find(p => p.id == req.params.id);
@@ -41,13 +48,13 @@ router.put("/:id", (req ,res) =>{
     }
     //validate
     //güncellemek istediği ürünü validate işlemine tabi tutmamız gerekir
-    const {error} = validateProduct(req.body)   //-> {error} yazmamız gelen array içinden error bilgisini al demek, başka bir değer almak istiyorsak {error , ressult } şeklinde de kullanılabilir
+    const {error} = validateProduct(req.body)   
 
     if ( error ) { //result dan hata gelirse direk sayfaya bu hatayı yazdır
         return res.status(400).send(result.error.details[0].message)
     }
 
-   product.name = req.body.name; //şuan hangi id yi seçtiysek o product oluyor onun name değerini yeni gelen name değeri ile değiştiriyoruz
+   product.name = req.body.name; 
    product.price = req.body.price;
    res.send(product)
 })
@@ -79,13 +86,6 @@ router.get("/:id" , (req, res) => {
     res.send(product)
 })
 
-    //validate
-const validateProduct = (product) => {
-    const schema = new Joi.object({
-        name: Joi.string().min(3).max(30).required(),
-        price: Joi.number().min(0).required()
-    })
-    return schema.validate(product)
-}
+
 
 module.exports = router

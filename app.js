@@ -14,7 +14,6 @@ app.use(cors({
     methods:["GET" , "POST"]
 })) 
 
-
 app.use("/api/product", products )
 app.use( "/", home )
 
@@ -29,40 +28,6 @@ mongoose.connect(`mongodb+srv://${userName}:${password}@cluster0.shuzdaz.mongodb
     .then( () => { console.log("mongoDB bağlantısı başarılı")})
     .catch( (err) => { err })
 
-//SCHEMA
-    const productSchema = mongoose.Schema({ 
-        name: String,
-        price: Number,
-        description: String,
-        imageUrl: String,
-        date: {
-            type: Date,
-        default: Date.now 
-        },
-        isActive: Boolean
-    });
-
-//MODEL
-    const Product = mongoose.model("Product" , productSchema) 
-
-//Nesne
-    const prd = new Product({ //Product sınıfı üzerinden p adında bir nesne oluşturduk.
-        name: "iphone 14",
-        price: 30000,
-        description:"iyi telefon",
-        imageUrl:"1.jpg",
-        isActive: true          
-    });
-
-    (async () => {
-        try {
-        const result = await prd.save();
-        console.log(result);
-                                                    //-> nesneyi veri tabanına kaydettik
-        } catch (err) {
-            console.log(err);
-        }
-    })();              
  
 app.listen(3000 , () => {
     console.log("listening on port 3000")
