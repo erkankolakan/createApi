@@ -4,18 +4,6 @@ const router = express.Router()
 //modeller
 const {Product , validateProduct} = require("../models/product")
 
- /*
-    Query Operators
-    eq => equal -- eşistlik
-    ne => not equal -- eşit değildir
-    gt => greater than -- daha büyük >
-    gte => greater than or equal -- daha büyük ya da eşit >=
-    lt => less than -- küçüktür <
-    lte => less than or equal -- küçüktür ya da eşit <=
-    in => [10 , 20 , 30] -- fiyatı 10 , 20 , 30 olan öğeleri al  
-    nin => [10 , 20 , 30] -- fiyatı 10 , 20 , 30 olmayan öğeleri al  
- */
-
 router.get("/", async(req ,res) => {
     const products = await Product.find() 
 
@@ -30,7 +18,7 @@ router.post("/", async (req ,res) => {
         }
 
         //Nesne
-        const product = new Product({ //Product sınıfı üzerinden p adında bir nesne oluşturduk.
+        const product = new Product({ 
             name: req.body.name,
             price: req.body.price,
             description: req.body.description,
@@ -49,8 +37,6 @@ router.post("/", async (req ,res) => {
   
 
 
-/* 1. yol -- query first - findbtid ile öğe alnır ve yeni değerler verilerek save() edilir
-   2. yol -- update diyerek tek işlemde güncelleyebiliriz */
 
 router.put("/:id", async(req ,res) =>{
 
@@ -58,17 +44,17 @@ router.put("/:id", async(req ,res) =>{
 
     const id = req.params.id
 
-    const product = await Product.findByIdAndUpdate({_id: id},{
-            $set:{
-                name : req.body.name,
-                price : req.body.price,
-                description : req.body.description,
-                imgUrl : req.body.imgUrl,
-                isActive : req.body.isActive,
-            }
-        },{new:true});
+    // const product = await Product.findByIdAndUpdate({_id: id},{
+    //         $set:{
+    //             name : req.body.name,
+    //             price : req.body.price,
+    //             description : req.body.description,
+    //             imgUrl : req.body.imgUrl,
+    //             isActive : req.body.isActive,
+    //         }
+    //     },{new:true});
 
-        res.send(product);
+    //     res.send(product);
     /* burada result bize update edilen kayıt sayısını veririr. Ama bu öğeyi güncelledi gerçeğini değiştirmiyor.
         Bunun güzel yani öğeyi seçiyim sonra gidiyim güncelliyim diye birşey yok tek sorguda seçip güncelliyoruz.
         Sadece id ile alakalı değil istersek isActive si true olantüm ürünleri güncelle diyebiliriz
@@ -78,43 +64,50 @@ router.put("/:id", async(req ,res) =>{
     */
 
 
-//     const id = req.params.id
-//     const product = await Product.findById({_id:id});
+    const product = await Product.findById({_id:id});
 
 
-//     if (!product) {
-//         return res.status(400).send("aradığınız ürün bulunamadı")
-//     }
-//     const {error} = validateProduct(req.body)   
+    if (!product) {
+        return res.status(400).send("aradığınız ürün bulunamadı")
+    }
+    const {error} = validateProduct(req.body)   
 
-//     if ( error ) { 
-//         return res.status(400).send(result.error.details[0].message)
-//     }
+    if ( error ) { 
+        return res.status(400).send(result.error.details[0].message)
+    }
 
-//    product.name = req.body.name; 
-//    product.price = req.body.price;
-//    product.description = req.body.description;
-//    product.imgUrl = req.body.imgUrl;
-//    product.isActive = req.body.isActive;
-//    res.send(product)
+   product.name = req.body.name; 
+   product.price = req.body.price;
+   product.description = req.body.description;
+   product.imgUrl = req.body.imgUrl;
+   product.isActive = req.body.isActive;
+   res.send(product)
 
-//    const updatedProduct = await product.save()
-//    res.send(updatedProduct)
+   const updatedProduct = await product.save()
+   res.send(updatedProduct)
 });
-
 
 router.delete("/:id" , async(req, res) => {
     const id = req.params.id
-    const product = await Product.findById({_id:id});
 
-    if (!product) {
-        return res.status(404).send("Böyle bir ürün bulunamadı")
+    const product = await Product.deleteOne({ _id : id })
+    if (!product) { // burayı deleteOne de kullanamayız onun için findByIdAndDelete kullanmak gerek
+        return res.status(404).send("Ürün silinirken hata oluştu veya belge bulunamadı.");
     }
 
-    const index = products.indexOf(product) 
-
-    products.splice(index, 1) 
     res.send(product)
+
+// deleteOne bir öğeyi silmek için kullanılır
+// deleteMany ilgili kritere uyan öğeleri silmek için kullanılır. 
+/* silinen öğeyi almak içinde findByIdAndDelete(id) -- kullanılabilir. Bunda sadece id değeri gönderilir.
+    const product = findByIdAndDelete(id) şeklinde kullanırsak bunlar üstünde hata raporları da alabiliriz. ÇÜNKÜ FİNDBTID DEĞERİ NULL VEYA BİR DEĞER DÖNDÜREBİLİR
+    if (!product) { // burayı deleteOne de kullanamayız onun için findByIdAndDelete kullanmak gerek
+        return res.status(404).send("Ürün silinirken hata oluştu veya belge bulunamadı.");
+    }
+
+    res.send(product)
+*/
+//--------------------------------------------------------------------------------------------
 })
 
 
