@@ -4,13 +4,13 @@ const router = express.Router()
 //modeller
 const {Product , validateProduct} = require("../models/product")
 
-    const products = [
-        {id:1, name:"iphone 13", price: 20000},
-        {id:2, name:"iphone 13", price: 30000},
-        {id:3, name:"iphone 13", price: 40000}
-    ]
+ 
 
-router.get("/", (req ,res) => {
+router.get("/", async(req ,res) => {
+    const products = await Product.find() //Product üzerinde olan tüm veriyi alır
+    // const products = await Product.find({price :10000 , isActive: true }) //where koşulu gibi price değeri 10000 olanı getir demiş olduk
+    // const products = await Product.find({isActive: true }).select({ name:1 }) // name değerine 1 dersek sadece name kolonunu diğerlerinini 0 kabul eder. Eğer name değerine 0 dersek name değerini almaz diğer tüm kolonları alır
+    // const products = await Product.find({isActive: true }).limit(2).select({ name:1 }) // bu şekilde limit yazarsak gelen 100 tane obje varsa 10 tanesini alır.
     res.send(products)
 })
 
@@ -76,9 +76,11 @@ router.delete("/:id" , (req, res) => {
 })
 
 
-router.get("/:id" , (req, res) => {
-
-    const product = products.find(p => p.id == req.params.id);
+router.get("/:id" , async(req, res) => {
+    const id = req.params.id
+    // const product = await Product.find({_id:id});
+    // const product = await Product.findOne({_id:id});
+    const product = await Product.findById({_id:id}); //hepsini kullanabiliriz 
 
     if (!product) {
         return res.status(404).send("Böyle bir ürün bulunamadı")
