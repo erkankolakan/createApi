@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const Joi = require('joi');
+const {Schema} = require("mongoose")
 
 //SCHEMA
 const productSchema = mongoose.Schema({  //Şemamızı ayarladık
@@ -8,10 +9,17 @@ const productSchema = mongoose.Schema({  //Şemamızı ayarladık
     description: String,
     imageUrl: String,
     date: {
-        type: Date,
+        type: Date, 
     default: Date.now 
     },
-    isActive: Boolean
+    isActive: Boolean,
+    category: {
+        type: Schema.Types.ObjectId, ref: "Category"
+    }
+
+    // Schema.Types.ObjectId tipinde bir veri ve ikincisi olarak da bu bilgi nerden gelicek, referansı neresi.
+    // Biz bunu yazdıktan sonra artık product içersinde bir Categorinin bir id sini bir referans olarak tutabiliriz.
+
 });
 
     //validate
@@ -21,7 +29,8 @@ const validateProduct = (product) => {  //Şemamız için validation ayarların�
         price: Joi.number().min(0).required(),
         description: Joi.string(),
         imageUrl: Joi.string(),
-        isActive: Joi.boolean()
+        isActive: Joi.boolean(),
+        category: Joi.string()
     })
     return schema.validate(product)
 }

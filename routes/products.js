@@ -5,7 +5,17 @@ const router = express.Router()
 const {Product , validateProduct} = require("../models/product")
 
 router.get("/", async(req ,res) => {
-    const products = await Product.find() 
+    const products = await Product.find()
+                                  .populate("category", "name -_id")
+                                  .select("-isActive -_id") // productın isActive ve _id parametresi gelmesin.
+
+/*
+
+    * populate ile extra bir sorguyu göndermiş oluruz. Burada category propertisi üzerinden extra bir sorgu gönderiyoruz 
+    * Biz eğer bunu yapmazsak category bilgisini id değerini getirir. Böyle yaparsak category bilgisini çiçek gibi açar içinden id değeri name değerini de getirir.
+    * Biz biz tüm değerleri istemiyorsak sadece arasından bir belirli değerleri almak istiyorsak populate ye 2. parametre olarak bir değer gireriz. istediğimiz değeri yazarız. Sitemediğimiz değeri de - ile belirtiriz
+
+*/
 
     res.send(products)
 })
@@ -23,15 +33,13 @@ router.post("/", async (req ,res) => {
             price: req.body.price,
             description: req.body.description,
             imageUrl: req.body.imageUrl,
-            isActive: req.body.isActive          
+            isActive: req.body.isActive,
+            category: req.body.category     
         });
 
             const newProduct = await product.save();
             res.send(newProduct);
     })
-  
-
-
 
 router.put("/:id", async(req ,res) =>{
 
@@ -85,7 +93,7 @@ router.put("/:id", async(req ,res) =>{
 router.delete("/:id" , async(req, res) => {
     const id = req.params.id
 
-    const product = await Product.DeleteOne({ _id : id })
+    const product = await Product.deleteOne({ _id : id })
     if (!product) { // burayı deleteOne de kullanamayız onun için findByIdAndDelete kullanmak gerek
         return res.status(404).send("Ürün silinirken hata oluştu veya belge bulunamadı.");
     }
