@@ -2,8 +2,6 @@ const express = require("express")
 const router = express.Router()
 const {Category , validateCategory} = require("../models/category")
 
-
-
 router.get( "/" ,async(req, res) => {
     const categories = await Category.find()
     res.send(categories)
@@ -68,7 +66,6 @@ router.put("/:id" , async (req, res) => {
 
     // res.send(category)
 });
-
 
 
 router.delete("/:id", async(req ,res) => {
