@@ -38,7 +38,7 @@ router.post("/" , async(req, res) => {
 })
 
 router.post("/auth", async (req, res) => {
-    const {error} = validateLogin(req.body) //validate loginine bilgileri gönderip kontorl ettiriyoruz.
+    const {error} = validateLogin(req.body)
     if (error) {
         return res.status(400).send(error.details[0].message)
     }
@@ -56,16 +56,10 @@ router.post("/auth", async (req, res) => {
         return res.status(400).send("hatalı parola")
     }
 
-// Kullancı bilgilerini başarılı bir şekilde girdiyse ona bir web Token vereceğiz.
-
     const token = jwt.sign({id: user._id}, "jwtPrivateKey") 
 
     res.send(token)
 
-/* 
-    sing() methodu bizden ilk başta PAYLOAD bilgisi bekler PAYLOAD da bizim saklamak istediğimiz bilgilerdir. Örneğin username id gibi bilgiler. 2. parametre olarak bir key bilgisi tanımlıyoruz. Herhangi bir string değer yazılabilir.
-*   jsw kullanmak için npm i jsonwebtoken paketini indirmemiz gerekir.
-*/
 } )
 
 module.exports = router
