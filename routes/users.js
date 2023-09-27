@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const {User ,validateRegister, validateLogin } = require("../models/user")
 const bcrypt = require("bcrypt")
-
+const jwt = require("jsonwebtoken")
 
 
 router.get("/" , (req, res) => {
@@ -49,13 +49,23 @@ router.post("/auth", async (req, res) => {
         return res.status(400).send("hatalı email veya parola")
     }
 
-    const isSuccess = await bcrypt.compare(req.body.password, user.password ) //gelen şifre ile userdaki şifreyi karşılaştır dedik
-
+//****
+    const isSuccess = await bcrypt.compare(req.body.password, user.password ) 
+//****
     if (!isSuccess) {
         return res.status(400).send("hatalı parola")
     }
-    res.send(true)
-} )
 
+// Kullancı bilgilerini başarılı bir şekilde girdiyse ona bir web Token vereceğiz.
+
+    const token = jwt.sign({id: user._id}, "jwtPrivateKey") 
+
+    res.send(token)
+
+/* 
+    sing() methodu bizden ilk başta PAYLOAD bilgisi bekler PAYLOAD da bizim saklamak istediğimiz bilgilerdir. Örneğin username id gibi bilgiler. 2. parametre olarak bir key bilgisi tanımlıyoruz. Herhangi bir string değer yazılabilir.
+*   jsw kullanmak için npm i jsonwebtoken paketini indirmemiz gerekir.
+*/
+} )
 
 module.exports = router
