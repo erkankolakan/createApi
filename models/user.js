@@ -42,10 +42,8 @@ const userSchema = mongoose.Schema({
 
 
 /* Her user objesinin erişebileceği methotlar oluşturabiliriz */
-
 userSchema.methods.createAuthToke = () => {
     return jwt.sign({id: this._id}, "jwtPrivateKey") 
-/* this diyerek bu class dan türetilecek olan nesne için token üret demiş oluyoruz */
 }
 
 const User = mongoose.model("User" , userSchema)

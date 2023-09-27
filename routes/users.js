@@ -34,11 +34,6 @@ router.post("/create" , async(req, res) => {
     const token = user.createAuthToke()
     res.header("x-auth-token" , token).send(user) 
 
-/*
-    burada res.header diyerek header kısmında kullanıcıya x-auth-token adında token bilgisini tutan bir alan tanımladım ve devamında send(user) diyerek kullanıcıya bilgilerini göndermiş oldum.
-**  Biz burada üyelik oluşturan kullanıcıya x-auth-token bilgisini header kısmına gönderdik
-*/
-
 })
 
 // api/users/auth : POST
@@ -62,9 +57,7 @@ router.post("/auth", async (req, res) => {
     }
 
     const token = user.createAuthToke()
-/*
-token bilgisini kullanıcının yaptığı talep sonucunda oluşturulan response objesinin header içerisine ekliyelim  
-*/
+
     res.send(token)
 
 } )
