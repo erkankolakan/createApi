@@ -7,7 +7,7 @@ const {Product , validateProduct} = require("../models/product")
 router.get("/", async(req ,res) => {
     const products = await Product.find()
                                   .populate("category", "name -_id")
-                                  .select("-isActive -_id") // productın isActive ve _id parametresi gelmesin.
+                                  .select("-isActive") // productın isActive ve _id parametresi gelmesin.
 
 /*
 

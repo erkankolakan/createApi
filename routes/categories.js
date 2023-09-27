@@ -3,7 +3,7 @@ const router = express.Router()
 const {Category , validateCategory} = require("../models/category")
 
 router.get( "/" ,async(req, res) => {
-    const categories = await Category.find()
+    const categories = await Category.find().populate("products","name price -_id")
     res.send(categories)
 
 })
@@ -29,7 +29,8 @@ router.post( "/" ,async(req, res) => {
     }
 
     const category = new Category({
-        name: req.body.name
+        name: req.body.name,
+        products: req.body.products
     })
         const newCategory = await category.save() 
         res.send(newCategory)
