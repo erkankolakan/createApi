@@ -2,15 +2,14 @@ const express = require("express")
 const router = express.Router()
 const {User ,validateRegister, validateLogin } = require("../models/user")
 const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
 
 
 router.get("/" , (req, res) => {
     res.send("selam dunya");
 })
 
-
-router.post("/" , async(req, res) => {
+// api/users/create : POST
+router.post("/create" , async(req, res) => {
     const {error} = validateRegister(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
@@ -22,21 +21,27 @@ router.post("/" , async(req, res) => {
         return res.status(400).send("Bu meil adresine sahip bir kullanıcı var");
     }
 
-    hashedPasword= await bcrypt.hash(req.body.password , 10) //şifreyi hashleme işlemi
+    hashedPasword= await bcrypt.hash(req.body.password , 10) 
 
-    user = new User({ //User tablosunda user adında yeni bir satır aç yeni kullanıcı geldi
+    user = new User({ 
         name: req.body.name,
         email: req.body.email,
-        password: hashedPasword //dataBaseye şifreleri hasleyerek göndermiş olduk
+        password: hashedPasword 
     }) 
-
 
     await user.save();
 
-    res.send(user)
+    const token = user.createAuthToke()
+    res.header("x-auth-token" , token).send(user) 
+
+/*
+    burada res.header diyerek header kısmında kullanıcıya x-auth-token adında token bilgisini tutan bir alan tanımladım ve devamında send(user) diyerek kullanıcıya bilgilerini göndermiş oldum.
+**  Biz burada üyelik oluşturan kullanıcıya x-auth-token bilgisini header kısmına gönderdik
+*/
 
 })
 
+// api/users/auth : POST
 router.post("/auth", async (req, res) => {
     const {error} = validateLogin(req.body)
     if (error) {
@@ -56,10 +61,14 @@ router.post("/auth", async (req, res) => {
         return res.status(400).send("hatalı parola")
     }
 
-    const token = jwt.sign({id: user._id}, "jwtPrivateKey") 
-
+    const token = user.createAuthToke()
+/*
+token bilgisini kullanıcının yaptığı talep sonucunda oluşturulan response objesinin header içerisine ekliyelim  
+*/
     res.send(token)
 
 } )
+
+
 
 module.exports = router

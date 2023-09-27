@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
 const Joi = require('joi');
+const jwt = require("jsonwebtoken")
 
 
 const userSchema = mongoose.Schema({
@@ -37,6 +38,14 @@ const userSchema = mongoose.Schema({
 
     })
     return schema.validate(user) //user den gelen bilgileri schema ya göre validate et
+}
+
+
+/* Her user objesinin erişebileceği methotlar oluşturabiliriz */
+
+userSchema.methods.createAuthToke = () => {
+    return jwt.sign({id: this._id}, "jwtPrivateKey") 
+/* this diyerek bu class dan türetilecek olan nesne için token üret demiş oluyoruz */
 }
 
 const User = mongoose.model("User" , userSchema)
