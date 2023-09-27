@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const {User ,validateUser } = require("../models/user")
+const {User ,validateRegister, validateLogin } = require("../models/user")
 const bcrypt = require("bcrypt")
 
 
@@ -11,7 +11,7 @@ router.get("/" , (req, res) => {
 
 
 router.post("/" , async(req, res) => {
-    const {error} = validateUser(req.body);
+    const {error} = validateRegister(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
@@ -36,6 +36,26 @@ router.post("/" , async(req, res) => {
     res.send(user)
 
 })
+
+router.post("/auth", async (req, res) => {
+    const {error} = validateLogin(req.body) //validate loginine bilgileri gönderip kontorl ettiriyoruz.
+    if (error) {
+        return res.status(400).send(error.details[0].message)
+    }
+
+    let user = await User.findOne({email : req.body.email})
+
+    if (!user) {
+        return res.status(400).send("hatalı email veya parola")
+    }
+
+    const isSuccess = await bcrypt.compare(req.body.password, user.password ) //gelen şifre ile userdaki şifreyi karşılaştır dedik
+
+    if (!isSuccess) {
+        return res.status(400).send("hatalı parola")
+    }
+    res.send(true)
+} )
 
 
 module.exports = router
