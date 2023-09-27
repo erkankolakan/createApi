@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 
 const products = require("./routes/products")
 const categories = require("./routes/categories")
+const users = require("./routes/users")
 const home = require("./routes/home")
 const cors = require("cors")
 
@@ -17,6 +18,7 @@ app.use(cors({
 
 app.use("/api/product", products )
 app.use( "/api/categories", categories)
+app.use( "/api/users", users)
 app.use( "/", home )
 
 
