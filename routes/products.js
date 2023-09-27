@@ -7,7 +7,7 @@ const {Product , validateProduct} = require("../models/product")
 router.get("/", async(req ,res) => {
     const products = await Product.find()
                                   .populate("category", "name -_id")
-                                  .select("-isActive") // productın isActive ve _id parametresi gelmesin.
+                                  .select("-isActive -comments._id") // productın isActive ve _id parametresi gelmesin.
 
 /*
 
@@ -34,7 +34,8 @@ router.post("/", async (req ,res) => {
             description: req.body.description,
             imageUrl: req.body.imageUrl,
             isActive: req.body.isActive,
-            category: req.body.category     
+            category: req.body.category,
+            comments: req.body.comments //-> tabiki ürün eklendikten sonra post edildikten sonra comment bilgisi bizim için aslında ürüne yapılana bir güncelleme üzerinden olması gerekir. Ayrı bir rooute yazılabilir veya güncelleme rooute si de kullanabilir
         });
 
             const newProduct = await product.save();
