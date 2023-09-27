@@ -2,12 +2,12 @@ const express = require("express")
 const router = express.Router()
 
 //modeller
-const {Product , validateProduct} = require("../models/product")
+const {Product, Comment , validateProduct} = require("../models/product")
 
 router.get("/", async(req ,res) => {
     const products = await Product.find()
                                   .populate("category", "name -_id")
-                                  .select("-isActive -comments._id") // productın isActive ve _id parametresi gelmesin.
+                                  .select("-isActive") // productın isActive ve _id parametresi gelmesin.
 
 /*
 
@@ -40,7 +40,45 @@ router.post("/", async (req ,res) => {
 
             const newProduct = await product.save();
             res.send(newProduct);
-    })
+})
+
+router.put("/comments/:id", async (req ,res) => {
+    const id = req.params.id
+    const product = await Product.findById(id)
+
+    if (!product) {
+        return res.status(404).send("aradıınız ürün bulunamadı")
+    }
+    //Nesne
+    const comment = new Comment({
+        text: req.body.text,
+        username: req.body.username
+    });
+
+    product.comments.push(comment) //product listesindeki comments dizisine gelen yorumu pushladık
+
+        const updateProduct = await product.save();
+        res.send(updateProduct);
+
+/* İlk ürünü bul daha sonra üründeki yorum yorum bilgileri yerine yeni göndermiş olduğumuz bilgileri yerleştir. dateBase de kaydetmek için ürünüdeki güncellemeyi save() sayesinde güncelle */
+})
+
+router.delete("/comments/:id", async (req ,res) => {
+    const id = req.params.id
+    const product = await Product.findById(id)
+
+    if (!product) {
+        return res.status(404).send("aradıınız ürün bulunamadı")
+    }
+
+    const comment = product.comments.id(req.body.commentid)    //liste içerisinden id ye göre ilgili yorumu almak istiyorum. id methodu alt dökümanda bizim içinde idye göre id sorgulamsını yapıyor.
+    comment.deleteOne();
+
+    const updateProduct = await product.save()
+    res.send(updateProduct)
+
+/*Temel mantık basit ilk önce ürüne erişiyoruz daha sonra bu üründeki categoris dizi içindeki yorumların bulunduğu diziye bakıyoruz ve body den göndermiş olduğumuz id sayesine ilgili yorumu bulup siliyoruz. dateBase de kaydetmek için ürünüdeki güncellemeyi save() sayesinde güncelle */
+})
 
 router.put("/:id", async(req ,res) =>{
 
@@ -85,6 +123,7 @@ router.put("/:id", async(req ,res) =>{
    product.description = req.body.description;
    product.imgUrl = req.body.imgUrl;
    product.isActive = req.body.isActive;
+   product.category = req.body.category;
    res.send(product)
 
    const updatedProduct = await product.save() // güncellemeden sonra save etmeyi unutmaman gerekir
@@ -117,7 +156,7 @@ router.delete("/:id" , async(req, res) => {
 
 router.get("/:id" , async(req, res) => {
     const id = req.params.id
-    const product = await Product.findById({_id:id});
+    const product = await Product.findById({_id:id}).populate("category", "name -_id");
 
     if (!product) {
         return res.status(404).send("Böyle bir ürün bulunamadı")
