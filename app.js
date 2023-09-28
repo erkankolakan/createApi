@@ -26,13 +26,9 @@ app.use( "/", home )
 // tüm routenin altına yazmak önemlidir.  Hataları burdan kontrol edeceğiz. NE ZAMAN BİR HATA OLURSA BU MİDDLEWARE BİZİM İÇİN ÇALIŞACAK
 app.use(error )
 
-
-
 const userName = "erkankolakan";
 const password = "tmVuxo01HxJRuSz2";
 const dataBase = "shopdb";
-
-//--> burası normalde  mongodb.net/?retryWrites= bu şekilde biz /? arasına data basenin ismi  ne olsun istiyorsak onu yazıyoruz
 
 (async () => {
     try {
@@ -44,7 +40,18 @@ const dataBase = "shopdb";
     }
 })();
 
+if (app.get("env") == "development") {
+    console.log("development"); //-> tabi burda console ekranına birşeyler yazmaktansa development modundayken yani uygulamayı geliştitken kullandığımız kısımları örneğin loglama kısımlarını buraya alırız ki kullanıcılar bu gibi şeylerlerle uğraşmasın.
+}else{
+    console.log("production") //-> kullanıcılar uzun hata masajlarını gösetermektense daha ciciş mesajlar gösterebiliriz.
+}
+
+
+
+const port = process.env.PORT || 3000;
+// process bizim uygulmayı yayınlamış olduğumuz ortama verdiğimi isim. Biz nede olsa sürekli 3000 portundan girmiyoruz random olarak giriyoruz. Eğer ortam değişkenleri içerisine post numarası yayımlanmadıysa 3000 ni kullan demiş olurz.
+
  
-app.listen(3000 , () => {
-    console.log("listening on port 3000")
-}) 
+app.listen(port , () => {
+    console.log(`listening on port ${port}`)
+})  
