@@ -1,3 +1,5 @@
+require('express-async-errors'); // en yukarıda olması gerekiyor. Bu paket sayesinde try catch kullamamıza gerek yok.
+
 const express = require("express")
 const router = express.Router()
 const auth = require("../middleware/auth")
@@ -8,16 +10,8 @@ const isAdmin = require("../middleware/isAdmin")
 const {Product, Comment , validateProduct} = require("../models/product")
 
 router.get("/", async(req ,res, next) => {
-
-    try {
-        throw new Error("bir hata oluştru yrama")
-        const products = await Product.find().populate("category", "name -_id").select("-isActive -comments._id") 
-        res.send(products)
-    }
-    catch (ex) {
-            next(ex) // normalde burda olan uzun hata kodu mesajı app.js de global alana koyduk ki fazla uğraşmayalım nerde catch de bie hata yaparsak app.js deki hata kodu çalışır.
-    }
-
+    const products = await Product.find().populate("category", "name -_id").select("-isActive -comments._id") 
+    res.send(products)
 })
 
 router.post("/" , [auth , isAdmin] ,async (req ,res) => { 
