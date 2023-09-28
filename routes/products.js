@@ -1,5 +1,7 @@
 const express = require("express")
 const router = express.Router()
+const auth = require("../middleware/auth")
+
 
 //modeller
 const {Product, Comment , validateProduct} = require("../models/product")
@@ -20,7 +22,8 @@ router.get("/", async(req ,res) => {
     res.send(products)
 })
 
-router.post("/", async (req ,res) => {
+router.post("/" , auth ,async (req ,res) => {
+
         const {error} = validateProduct(req.body)
 
         if ( error ) {
@@ -42,7 +45,7 @@ router.post("/", async (req ,res) => {
             res.send(newProduct);
 })
 
-router.put("/comments/:id", async (req ,res) => {
+router.put("/comments/:id" , auth , async (req ,res) => {
     const id = req.params.id
     const product = await Product.findById(id)
 
@@ -63,7 +66,7 @@ router.put("/comments/:id", async (req ,res) => {
 /* İlk ürünü bul daha sonra üründeki yorum yorum bilgileri yerine yeni göndermiş olduğumuz bilgileri yerleştir. dateBase de kaydetmek için ürünüdeki güncellemeyi save() sayesinde güncelle */
 })
 
-router.delete("/comments/:id", async (req ,res) => {
+router.delete("/comments/:id" , auth , async (req ,res) => {
     const id = req.params.id
     const product = await Product.findById(id)
 
@@ -80,7 +83,7 @@ router.delete("/comments/:id", async (req ,res) => {
 /*Temel mantık basit ilk önce ürüne erişiyoruz daha sonra bu üründeki categoris dizi içindeki yorumların bulunduğu diziye bakıyoruz ve body den göndermiş olduğumuz id sayesine ilgili yorumu bulup siliyoruz. dateBase de kaydetmek için ürünüdeki güncellemeyi save() sayesinde güncelle */
 })
 
-router.put("/:id", async(req ,res) =>{
+router.put("/:id" , auth , async(req ,res) =>{
 
     //1. parametre öğe seçme işlemi, 2. parametrede ise hangi alanları set etmek istiyorzu yanii güncellemek istiyorsunuz.
 
@@ -154,7 +157,7 @@ router.delete("/:id" , async(req, res) => {
 })
 
 
-router.get("/:id" , async(req, res) => {
+router.get("/:id"  , auth , async(req, res) => {
     const id = req.params.id
     const product = await Product.findById({_id:id}).populate("category", "name -_id");
 
