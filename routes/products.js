@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const auth = require("../middleware/auth")
+const isAdmin = require("../middleware/isAdmin")
 
 
 //modeller
@@ -22,8 +23,8 @@ router.get("/", async(req ,res) => {
     res.send(products)
 })
 
-router.post("/" , auth ,async (req ,res) => {
-
+router.post("/" , [auth , isAdmin] ,async (req ,res) => { 
+//->[auth , isAdmin] diyerek ilk auth sonra isAdmin işle dedik. auth -> bir üyelik gerektiriyor der, isAdmin-> üyeliğin var ama yetki yok der.
         const {error} = validateProduct(req.body)
 
         if ( error ) {
@@ -38,14 +39,14 @@ router.post("/" , auth ,async (req ,res) => {
             imageUrl: req.body.imageUrl,
             isActive: req.body.isActive,
             category: req.body.category,
-            comments: req.body.comments //-> tabiki ürün eklendikten sonra post edildikten sonra comment bilgisi bizim için aslında ürüne yapılana bir güncelleme üzerinden olması gerekir. Ayrı bir rooute yazılabilir veya güncelleme rooute si de kullanabilir
+            comments: req.body.comments 
         });
 
             const newProduct = await product.save();
             res.send(newProduct);
 })
 
-router.put("/comments/:id" , auth , async (req ,res) => {
+router.put("/comments/:id" ,  [auth , isAdmin], async (req ,res) => {
     const id = req.params.id
     const product = await Product.findById(id)
 
@@ -66,7 +67,7 @@ router.put("/comments/:id" , auth , async (req ,res) => {
 /* İlk ürünü bul daha sonra üründeki yorum yorum bilgileri yerine yeni göndermiş olduğumuz bilgileri yerleştir. dateBase de kaydetmek için ürünüdeki güncellemeyi save() sayesinde güncelle */
 })
 
-router.delete("/comments/:id" , auth , async (req ,res) => {
+router.delete("/comments/:id" ,  [auth , isAdmin], async (req ,res) => {
     const id = req.params.id
     const product = await Product.findById(id)
 
@@ -83,7 +84,7 @@ router.delete("/comments/:id" , auth , async (req ,res) => {
 /*Temel mantık basit ilk önce ürüne erişiyoruz daha sonra bu üründeki categoris dizi içindeki yorumların bulunduğu diziye bakıyoruz ve body den göndermiş olduğumuz id sayesine ilgili yorumu bulup siliyoruz. dateBase de kaydetmek için ürünüdeki güncellemeyi save() sayesinde güncelle */
 })
 
-router.put("/:id" , auth , async(req ,res) =>{
+router.put("/:id" ,  [auth , isAdmin], async(req ,res) =>{
 
     //1. parametre öğe seçme işlemi, 2. parametrede ise hangi alanları set etmek istiyorzu yanii güncellemek istiyorsunuz.
 
@@ -133,7 +134,7 @@ router.put("/:id" , auth , async(req ,res) =>{
    res.send(updatedProduct)
 });
 
-router.delete("/:id" , async(req, res) => {
+router.delete("/:id" ,  [auth , isAdmin], async(req, res) => {
     const id = req.params.id
 
     const product = await Product.deleteOne({ _id : id })

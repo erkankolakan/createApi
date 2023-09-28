@@ -50,7 +50,7 @@ router.post("/auth", async (req, res) => {
     }
 
 //****
-    const isSuccess = await bcrypt.compare(req.body.password, user.password ) 
+    const isSuccess = await bcrypt.compare(req.body.password, user.password); 
 //****
     if (!isSuccess) {
         return res.status(400).send("hatalı parola")

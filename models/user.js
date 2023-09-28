@@ -16,10 +16,10 @@ const userSchema = mongoose.Schema({
     password:{
         type: String,
         required: true,
-    }
+    },
+    isAdmin: Boolean
 }, {timestamps: true})
 
-  //User oluşturken ihtiyacımız olan 
   const validateRegister = (user) => { 
     const schema = new Joi.object({
         name: Joi.string().min(3).max(50).required(), 
@@ -27,23 +27,26 @@ const userSchema = mongoose.Schema({
         password: Joi.string().min(5).required(), 
 
     })
-    return schema.validate(user) //user den gelen bilgileri schema ya göre validate et
+    return schema.validate(user)
 }
-
-  //User oluşturken ihtiyacımız olan 
   const validateLogin = (user) => { 
     const schema = new Joi.object({
         email: Joi.string().min(3).max(50).required().email(), 
         password: Joi.string().min(5).required(), 
 
     })
-    return schema.validate(user) //user den gelen bilgileri schema ya göre validate et
+    return schema.validate(user)
 }
 
 
 /* Her user objesinin erişebileceği methotlar oluşturabiliriz */
-userSchema.methods.createAuthToke = () => {
-    return jwt.sign({id: this._id}, "jwtPrivateKey") 
+userSchema.methods.createAuthToke = function() { //bu fonksiyonda this kullandığımız için normal function kullanmalıyız arrow olmaz
+    const decodedToken =  jwt.sign({
+        id: this._id,
+        isAdmin: this.isAdmin //-> giriş yapan kullanıcın isAdmin bilgisinide token içinde tutuyoruz.
+    },
+    "jwtPrivateKey") 
+    return decodedToken
 }
 
 const User = mongoose.model("User" , userSchema)
