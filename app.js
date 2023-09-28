@@ -9,6 +9,7 @@ const users = require("./routes/users")
 const home = require("./routes/home")
 const cors = require("cors")
 const error = require("./middleware/error")
+const logger = require("./middleware/logger")
 
 app.use(express.json()) //gelen datanın Json olarak okunacağını söylüyoruz
 
@@ -27,14 +28,21 @@ app.use(error )
 
 
 
-const userName = "erkankolakan"
-const password = "tmVuxo01HxJRuSz2"
-const dataBase = "shopdb"
+const userName = "erkankolakan";
+const password = "tmVuxo01HxJRuSz2";
+const dataBase = "shopdb";
 
 //--> burası normalde  mongodb.net/?retryWrites= bu şekilde biz /? arasına data basenin ismi  ne olsun istiyorsak onu yazıyoruz
-mongoose.connect(`mongodb+srv://${userName}:${password}@cluster0.shuzdaz.mongodb.net/${dataBase}?retryWrites=true&w=majority`)
-    .then( () => { console.log("mongoDB bağlantısı başarılı")})
-    .catch( (err) => { err })
+
+(async () => {
+    try {
+        await mongoose.connect(`mongodb+srv://${userName}:${password}@cluster0.shuzdaz.mongodb.net/${dataBase}?retryWrites=true&w=majority`);
+        logger.info("mongoDb bağlantısı kuruldu");
+    }
+    catch (err) {
+        console.log(err);
+    }
+})();
 
  
 app.listen(3000 , () => {

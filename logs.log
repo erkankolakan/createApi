@@ -1,0 +1,41 @@
+{"level":"error","message":"asd"}
+{
+  message: 'mongoDb bağlantısı kuruldu',
+  level: 'info',
+  timestamp: '09-28-2023 14:54:41'
+}
+{
+  message: 'mongoDb bağlantısı kuruldu',
+  level: 'info',
+  timestamp: '09-28-2023 14:56:21'
+}
+{
+  message: 'mongoDb bağlantısı kuruldu',
+  level: 'info',
+  timestamp: '09-28-2023 14:56:23'
+}
+{
+  message: 'mongoDb bağlantısı kuruldu',
+  level: 'info',
+  timestamp: '09-28-2023 14:56:29'
+}
+{
+  message: 'mongoDb bağlantısı kuruldu',
+  level: 'info',
+  timestamp: '09-28-2023 14:56:36'
+}
+{
+  message: 'hata oluştu',
+  level: 'error',
+  timestamp: '09-28-2023 14:56:47'
+}
+{
+  message: 'mongoDb bağlantısı kuruldu',
+  level: 'info',
+  timestamp: '09-28-2023 14:56:48'
+}
+{
+  message: 'mongoDb bağlantısı kuruldu',
+  level: 'info',
+  timestamp: '09-28-2023 14:57:04'
+}

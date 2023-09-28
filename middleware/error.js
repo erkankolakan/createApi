@@ -1,5 +1,10 @@
+//  biz buraya tüm hataları taşıdığımız için loggerı burda kullanmak oldukça mantıklı bir hareket olacaktır.
+
+const logger = require("../middleware/logger")
+
 module.exports = (err , req, res, next) => {
-    // logging burda yapıyoruz artık bir hata gelirse burası çalışıcak.
+    logger.error(err.message)
     res.status(500).send("bir hata oluştu lütfen daha sonra tekrar deneyin")
-    //herhangi bir catch den hata gelirse burası çalışıcak bu sayede her catch in altına tek tek bu uzun mesajı yazmak zorunda kalmadık.
 }
+
+//logger.info yerine info.err, info.warn veya info.log() diyerek mesajı direk yazdıra biliriz mesaj yazmazsak logger içindeki level aktif olacaktır.
