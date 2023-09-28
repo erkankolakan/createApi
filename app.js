@@ -31,19 +31,13 @@ const userName = config.get("db.userName");  //bu bilgileri development.json iç
 const password = config.get("db.password");
 const dataBase = config.get("db.dataBase");
 
-(async () => {
-    try {
-        await mongoose.connect(`mongodb+srv://${userName}:${password}@cluster0.shuzdaz.mongodb.net/${dataBase}?retryWrites=true&w=majority`);
-        logger.info("mongoDb bağlantısı kuruldu");
-    }
-    catch (err) {
-        console.log(err);
-    }
-})();
+mongoose
+    .connect(`mongodb+srv://${userName}:${password}@cluster0.shuzdaz.mongodb.net/${dataBase}?retryWrites=true&w=majority`)
+    .then(() => console.log("mongodb bağlantısı kuruldu"))
+
+//-> Bizim veri tabanına bağlanma kısmında catch yazmadığımız için ele alınmayan bir hata bilgisi var bu normal şartlarda bir hata geldiği zaman uygulamamın çökmesine neden olur. Ama biz üstde unhandledRejection diyerek ele alınmayan hataları alıp hata dosyasına kaydediyorum.
 
 
-console.log(config.get("name")); // config.get diyerek burada tanımlamış olduğumuz herhangi bir key bilgisine göre bu dosya içerisinde bu bilgi alınarak sayfa üzerinde yazdıralabilir.
- 
 const port = process.env.PORT || 3000;
 
 app.listen(port , () => {

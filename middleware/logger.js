@@ -15,8 +15,9 @@ const logger = createLogger({
         prettyPrint()
     ),
     transports:[
-        new transports.Console(), 
-        new transports.File({filename: "logs.log" , level: "error"}), // sadece error mesajşarını dosyaya kaydet
+        new transports.Console(),
+        new transports.File({filename: "logs/logs.log" , level: "error", maxFiles:"3d"}), // sadece error mesajşarını dosyaya kaydet
+        new transports.File({filename: "logs/exceptions.log" , level: "error", handleExceptions: true , handleExceptions:true , maxFiles:"3d"}),
         new transports.MongoDB({
             level: "error", //-> hangi hatalar veri tabanına kayıt olsun. error etiketi olanlar kayıt olsun. Ayrıca biz burada yukardaki debug bilgisini ezerek normal servis ettiğimiz zamanda hataların databaseye kaydolmasını söyledik ama Console fln onlar sadece debug modda çalışır. İstediğimiz yerde üsteki yazan debug bilgisini ezebiliriz
             db: `mongodb+srv://${userName}:${password}@cluster0.shuzdaz.mongodb.net/${dataBase}?retryWrites=true&w=majority`,
@@ -26,6 +27,10 @@ const logger = createLogger({
             collection:"server_logs" //-> verir tabanında server_log isminde kaydolucak bu bilgiler
         })
     ]
-})
+});
 
 module.exports = logger
+
+// uncaughtException olayını kullanarak, uygulamanızda yakalanmayan hataları yakalayabilirsiniz. Bu, uygulamanızın beklenmedik bir şekilde çökmesini önlemeye yardımcı olabilir.
+
+// unhandledRejection olayını kullanarak, uygulamanızda işlenmeyen Promise hatalarını yakalayabilirsiniz. Bu,    uygulamanızın beklenmedik bir şekilde çökmesini önlemeye yardımcı olabilir.
