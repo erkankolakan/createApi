@@ -7,24 +7,20 @@ const isAdmin = require("../middleware/isAdmin")
 //modeller
 const {Product, Comment , validateProduct} = require("../models/product")
 
-router.get("/", async(req ,res) => {
-    const products = await Product.find()
-                                  .populate("category", "name -_id")
-                                  .select("-isActive") // productın isActive ve _id parametresi gelmesin.
+router.get("/", async(req ,res, next) => {
 
-/*
+    try {
+        throw new Error("bir hata oluştru yrama")
+        const products = await Product.find().populate("category", "name -_id").select("-isActive -comments._id") 
+        res.send(products)
+    }
+    catch (ex) {
+            next(ex) // normalde burda olan uzun hata kodu mesajı app.js de global alana koyduk ki fazla uğraşmayalım nerde catch de bie hata yaparsak app.js deki hata kodu çalışır.
+    }
 
-    * populate ile extra bir sorguyu göndermiş oluruz. Burada category propertisi üzerinden extra bir sorgu gönderiyoruz 
-    * Biz eğer bunu yapmazsak category bilgisini id değerini getirir. Böyle yaparsak category bilgisini çiçek gibi açar içinden id değeri name değerini de getirir.
-    * Biz biz tüm değerleri istemiyorsak sadece arasından bir belirli değerleri almak istiyorsak populate ye 2. parametre olarak bir değer gireriz. istediğimiz değeri yazarız. Sitemediğimiz değeri de - ile belirtiriz
-
-*/
-
-    res.send(products)
 })
 
 router.post("/" , [auth , isAdmin] ,async (req ,res) => { 
-//->[auth , isAdmin] diyerek ilk auth sonra isAdmin işle dedik. auth -> bir üyelik gerektiriyor der, isAdmin-> üyeliğin var ama yetki yok der.
         const {error} = validateProduct(req.body)
 
         if ( error ) {
