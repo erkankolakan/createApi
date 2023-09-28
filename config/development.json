@@ -1,0 +1,9 @@
+{
+    "db" : {
+        "name": "shop api - development",
+        "dataBase" : "shopdb",
+        "userName":"erkankolakan"
+
+    }
+}
+

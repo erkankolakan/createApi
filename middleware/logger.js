@@ -1,11 +1,12 @@
+const config = require("config")
 const {transports , format, createLogger} = require("winston")
 const {combine, timestamp, prettyPrint} = format
 require("winston-mongodb")
 
+const userName = config.get("db.userName");  //bu bilgileri development.json içerisinde tutuyoruz
+const password = config.get("db.password");
+const dataBase = config.get("db.dataBase");
 
-const userName = "erkankolakan";
-const password = "tmVuxo01HxJRuSz2";
-const dataBase = "shopdb";
 
 const logger = createLogger({
     level: "debug", //defaul olarak debug modda çalışacaklar

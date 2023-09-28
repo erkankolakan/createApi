@@ -1,6 +1,6 @@
 /* Biz bu token varmı yok mu, Yetkili bir token mi değilmi sorunus bir çok yerde kullanacağız ve biir sürü router içinde bulunacak bir validate işlemi. Bu yüzden global bir alanda tanımlamak daha mantıklıdır*/
-
 const jwt = require("jsonwebtoken")
+const config = require("config")
 
 module.exports = (req , res , next) => {
     const token = req.header("x-auth-token")
@@ -9,7 +9,7 @@ module.exports = (req , res , next) => {
     }
     
     try {
-        const deCodedToken = jwt.verify(token, "jwtPrivateKey")
+        const deCodedToken = jwt.verify(token, config.get("auth.jwtPrivateKey"))
         req.user = deCodedToken
         next()
     } catch (ex) {
