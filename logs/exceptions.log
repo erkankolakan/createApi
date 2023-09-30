@@ -1,0 +1,654 @@
+{
+  error: ReferenceError: cors is not defined
+      at Object.<anonymous> (D:\projects\Sadık Turanla BackEnd eğitimi\apii\app.js:10:5)
+      at Module._compile (node:internal/modules/cjs/loader:1255:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)
+      at Module.load (node:internal/modules/cjs/loader:1113:32)
+      at Module._load (node:internal/modules/cjs/loader:960:12)
+      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)
+      at node:internal/main/run_main_module:23:47,
+  level: 'error',
+  message: 'uncaughtException: cors is not defined\n' +
+    'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  stack: 'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  exception: true,
+  date: 'Sat Sep 30 2023 13:48:12 GMT+0300 (GMT+03:00)',
+  process: {
+    pid: 17892,
+    uid: null,
+    gid: null,
+    cwd: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v20.2.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js'
+    ],
+    memoryUsage: {
+      rss: 85622784,
+      heapTotal: 60821504,
+      heapUsed: 32141688,
+      external: 39043269,
+      arrayBuffers: 36761409
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 531060.156 },
+  trace: [
+    {
+      column: 5,
+      file: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js',
+      function: null,
+      line: 10,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1255,
+      method: '_compile',
+      native: false
+    },
+    {
+      column: 10,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._extensions..js',
+      line: 1309,
+      method: '.js',
+      native: false
+    },
+    {
+      column: 32,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.load',
+      line: 1113,
+      method: 'load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._load',
+      line: 960,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/run_main',
+      function: 'Function.executeUserEntryPoint [as runMain]',
+      line: 83,
+      method: 'executeUserEntryPoint [as runMain]',
+      native: false
+    },
+    {
+      column: 47,
+      file: 'node:internal/main/run_main_module',
+      function: null,
+      line: 23,
+      method: null,
+      native: false
+    }
+  ],
+  timestamp: '09-30-2023 13:48:12'
+}
+{
+  error: ReferenceError: cors is not defined
+      at Object.<anonymous> (D:\projects\Sadık Turanla BackEnd eğitimi\apii\app.js:10:5)
+      at Module._compile (node:internal/modules/cjs/loader:1255:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)
+      at Module.load (node:internal/modules/cjs/loader:1113:32)
+      at Module._load (node:internal/modules/cjs/loader:960:12)
+      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)
+      at node:internal/main/run_main_module:23:47,
+  level: 'error',
+  message: 'uncaughtException: cors is not defined\n' +
+    'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  stack: 'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  exception: true,
+  date: 'Sat Sep 30 2023 13:49:27 GMT+0300 (GMT+03:00)',
+  process: {
+    pid: 11372,
+    uid: null,
+    gid: null,
+    cwd: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v20.2.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js'
+    ],
+    memoryUsage: {
+      rss: 85061632,
+      heapTotal: 61083648,
+      heapUsed: 32072632,
+      external: 39043269,
+      arrayBuffers: 36761409
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 531134.921 },
+  trace: [
+    {
+      column: 5,
+      file: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js',
+      function: null,
+      line: 10,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1255,
+      method: '_compile',
+      native: false
+    },
+    {
+      column: 10,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._extensions..js',
+      line: 1309,
+      method: '.js',
+      native: false
+    },
+    {
+      column: 32,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.load',
+      line: 1113,
+      method: 'load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._load',
+      line: 960,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/run_main',
+      function: 'Function.executeUserEntryPoint [as runMain]',
+      line: 83,
+      method: 'executeUserEntryPoint [as runMain]',
+      native: false
+    },
+    {
+      column: 47,
+      file: 'node:internal/main/run_main_module',
+      function: null,
+      line: 23,
+      method: null,
+      native: false
+    }
+  ],
+  timestamp: '09-30-2023 13:49:27'
+}
+{
+  error: ReferenceError: cors is not defined
+      at Object.<anonymous> (D:\projects\Sadık Turanla BackEnd eğitimi\apii\app.js:9:5)
+      at Module._compile (node:internal/modules/cjs/loader:1255:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)
+      at Module.load (node:internal/modules/cjs/loader:1113:32)
+      at Module._load (node:internal/modules/cjs/loader:960:12)
+      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)
+      at node:internal/main/run_main_module:23:47,
+  level: 'error',
+  message: 'uncaughtException: cors is not defined\n' +
+    'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:9:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  stack: 'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:9:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  exception: true,
+  date: 'Sat Sep 30 2023 13:49:54 GMT+0300 (GMT+03:00)',
+  process: {
+    pid: 18168,
+    uid: null,
+    gid: null,
+    cwd: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v20.2.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js'
+    ],
+    memoryUsage: {
+      rss: 88289280,
+      heapTotal: 61083648,
+      heapUsed: 39039128,
+      external: 40091350,
+      arrayBuffers: 37809490
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 531161.656 },
+  trace: [
+    {
+      column: 5,
+      file: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js',
+      function: null,
+      line: 9,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1255,
+      method: '_compile',
+      native: false
+    },
+    {
+      column: 10,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._extensions..js',
+      line: 1309,
+      method: '.js',
+      native: false
+    },
+    {
+      column: 32,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.load',
+      line: 1113,
+      method: 'load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._load',
+      line: 960,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/run_main',
+      function: 'Function.executeUserEntryPoint [as runMain]',
+      line: 83,
+      method: 'executeUserEntryPoint [as runMain]',
+      native: false
+    },
+    {
+      column: 47,
+      file: 'node:internal/main/run_main_module',
+      function: null,
+      line: 23,
+      method: null,
+      native: false
+    }
+  ],
+  timestamp: '09-30-2023 13:49:54'
+}
+{
+  error: ReferenceError: cors is not defined
+      at Object.<anonymous> (D:\projects\Sadık Turanla BackEnd eğitimi\apii\app.js:10:5)
+      at Module._compile (node:internal/modules/cjs/loader:1255:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)
+      at Module.load (node:internal/modules/cjs/loader:1113:32)
+      at Module._load (node:internal/modules/cjs/loader:960:12)
+      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)
+      at node:internal/main/run_main_module:23:47,
+  level: 'error',
+  message: 'uncaughtException: cors is not defined\n' +
+    'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  stack: 'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  exception: true,
+  date: 'Sat Sep 30 2023 13:49:56 GMT+0300 (GMT+03:00)',
+  process: {
+    pid: 25072,
+    uid: null,
+    gid: null,
+    cwd: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v20.2.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js'
+    ],
+    memoryUsage: {
+      rss: 85725184,
+      heapTotal: 60821504,
+      heapUsed: 32029360,
+      external: 39043269,
+      arrayBuffers: 36761409
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 531163.671 },
+  trace: [
+    {
+      column: 5,
+      file: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js',
+      function: null,
+      line: 10,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1255,
+      method: '_compile',
+      native: false
+    },
+    {
+      column: 10,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._extensions..js',
+      line: 1309,
+      method: '.js',
+      native: false
+    },
+    {
+      column: 32,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.load',
+      line: 1113,
+      method: 'load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._load',
+      line: 960,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/run_main',
+      function: 'Function.executeUserEntryPoint [as runMain]',
+      line: 83,
+      method: 'executeUserEntryPoint [as runMain]',
+      native: false
+    },
+    {
+      column: 47,
+      file: 'node:internal/main/run_main_module',
+      function: null,
+      line: 23,
+      method: null,
+      native: false
+    }
+  ],
+  timestamp: '09-30-2023 13:49:56'
+}
+{
+  error: ReferenceError: ö is not defined
+      at Object.<anonymous> (D:\projects\Sadık Turanla BackEnd eğitimi\apii\app.js:10:1)
+      at Module._compile (node:internal/modules/cjs/loader:1255:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)
+      at Module.load (node:internal/modules/cjs/loader:1113:32)
+      at Module._load (node:internal/modules/cjs/loader:960:12)
+      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)
+      at node:internal/main/run_main_module:23:47,
+  level: 'error',
+  message: 'uncaughtException: ö is not defined\n' +
+    'ReferenceError: ö is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:1)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  stack: 'ReferenceError: ö is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:1)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  exception: true,
+  date: 'Sat Sep 30 2023 13:52:44 GMT+0300 (GMT+03:00)',
+  process: {
+    pid: 20216,
+    uid: null,
+    gid: null,
+    cwd: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v20.2.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js'
+    ],
+    memoryUsage: {
+      rss: 85389312,
+      heapTotal: 60821504,
+      heapUsed: 32191920,
+      external: 39051461,
+      arrayBuffers: 36769601
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 531331.906 },
+  trace: [
+    {
+      column: 1,
+      file: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js',
+      function: null,
+      line: 10,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1255,
+      method: '_compile',
+      native: false
+    },
+    {
+      column: 10,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._extensions..js',
+      line: 1309,
+      method: '.js',
+      native: false
+    },
+    {
+      column: 32,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.load',
+      line: 1113,
+      method: 'load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._load',
+      line: 960,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/run_main',
+      function: 'Function.executeUserEntryPoint [as runMain]',
+      line: 83,
+      method: 'executeUserEntryPoint [as runMain]',
+      native: false
+    },
+    {
+      column: 47,
+      file: 'node:internal/main/run_main_module',
+      function: null,
+      line: 23,
+      method: null,
+      native: false
+    }
+  ],
+  timestamp: '09-30-2023 13:52:44'
+}
+{
+  error: ReferenceError: cors is not defined
+      at Object.<anonymous> (D:\projects\Sadık Turanla BackEnd eğitimi\apii\app.js:10:5)
+      at Module._compile (node:internal/modules/cjs/loader:1255:14)
+      at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)
+      at Module.load (node:internal/modules/cjs/loader:1113:32)
+      at Module._load (node:internal/modules/cjs/loader:960:12)
+      at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)
+      at node:internal/main/run_main_module:23:47,
+  level: 'error',
+  message: 'uncaughtException: cors is not defined\n' +
+    'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  stack: 'ReferenceError: cors is not defined\n' +
+    '    at Object.<anonymous> (D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js:10:5)\n' +
+    '    at Module._compile (node:internal/modules/cjs/loader:1255:14)\n' +
+    '    at Module._extensions..js (node:internal/modules/cjs/loader:1309:10)\n' +
+    '    at Module.load (node:internal/modules/cjs/loader:1113:32)\n' +
+    '    at Module._load (node:internal/modules/cjs/loader:960:12)\n' +
+    '    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:83:12)\n' +
+    '    at node:internal/main/run_main_module:23:47',
+  exception: true,
+  date: 'Sat Sep 30 2023 13:52:46 GMT+0300 (GMT+03:00)',
+  process: {
+    pid: 11456,
+    uid: null,
+    gid: null,
+    cwd: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii',
+    execPath: 'C:\\Program Files\\nodejs\\node.exe',
+    version: 'v20.2.0',
+    argv: [
+      'C:\\Program Files\\nodejs\\node.exe',
+      'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js'
+    ],
+    memoryUsage: {
+      rss: 85434368,
+      heapTotal: 60821504,
+      heapUsed: 32255864,
+      external: 39051461,
+      arrayBuffers: 36769601
+    }
+  },
+  os: { loadavg: [ 0, 0, 0 ], uptime: 531333.515 },
+  trace: [
+    {
+      column: 5,
+      file: 'D:\\projects\\Sadık Turanla BackEnd eğitimi\\apii\\app.js',
+      function: null,
+      line: 10,
+      method: null,
+      native: false
+    },
+    {
+      column: 14,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._compile',
+      line: 1255,
+      method: '_compile',
+      native: false
+    },
+    {
+      column: 10,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._extensions..js',
+      line: 1309,
+      method: '.js',
+      native: false
+    },
+    {
+      column: 32,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module.load',
+      line: 1113,
+      method: 'load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/cjs/loader',
+      function: 'Module._load',
+      line: 960,
+      method: '_load',
+      native: false
+    },
+    {
+      column: 12,
+      file: 'node:internal/modules/run_main',
+      function: 'Function.executeUserEntryPoint [as runMain]',
+      line: 83,
+      method: 'executeUserEntryPoint [as runMain]',
+      native: false
+    },
+    {
+      column: 47,
+      file: 'node:internal/main/run_main_module',
+      function: null,
+      line: 23,
+      method: null,
+      native: false
+    }
+  ],
+  timestamp: '09-30-2023 13:52:46'
+}

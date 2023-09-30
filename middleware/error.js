@@ -1,9 +1,9 @@
 //  biz buraya tüm hataları taşıdığımız için loggerı burda kullanmak oldukça mantıklı bir hareket olacaktır.
 
-const logger = require("../middleware/logger")
+const logger = require("../startup/logger")
 
 module.exports = (err , req, res, next) => {
-    logger.error(err.message)
+    logger.error(err.message ,err)
     res.status(500).send("bir hata oluştu lütfen daha sonra tekrar deneyin")
 }
 
